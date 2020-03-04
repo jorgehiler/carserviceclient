@@ -11,7 +11,7 @@ import { OwnerService } from '../shared/owner/owner.service';
 })
 export class OwnerEditComponent implements OnInit {
 
-  car: any = {};
+  owener: any = {};
 
   sub: Subscription;
 
@@ -27,12 +27,15 @@ export class OwnerEditComponent implements OnInit {
       if (id) {
         this.carService.get(id).subscribe((car: any) => {
           if (car) {
-            this.car = car;
-            this.car.href = car._links.self.href;
+            this.owener = car;
           } else {
             console.log(`Car with id '${id}' not found, returning to list`);
             this.gotoList();
           }
+          console.log(car.name);
+          console.log(car);
+          this.owener = car;
+
         });
       }
     });

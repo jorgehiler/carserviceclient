@@ -14,10 +14,13 @@ export class OwnerService {
   }
 
   getAll(): Observable<any> {
+    console.log("aqi")
+    console.log(this.http.get(this.API + '/owners'));
     return this.http.get(this.API + '/owners');
   }
 
   get(id: string) {
+    console.log(this.http.get(this.OWNER_API + '/' + id));
     return this.http.get(this.OWNER_API + '/' + id);
   }
 
