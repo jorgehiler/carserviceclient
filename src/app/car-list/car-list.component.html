@@ -7,6 +7,7 @@
         <h3 mat-line>
           <a mat-button [routerLink]="['/car-edit', car.id]">{{car.name}}</a>
         </h3>
+        <app-car-owner ownerDni="{{car.ownerDni}}" ></app-car-owner>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

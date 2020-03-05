@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CarListComponent } from './car-list/car-list.component';
 import { CarEditComponent } from './car-edit/car-edit.component';
 import { OwnerEditComponent } from './owner-edit/owner-edit.component';
 import { OwnerListComponent } from './owner-list/owner-list.component';
+import { ListCarOwnerComponent } from './list-car-owner/list-car-owner.component';
+import { CarOwnerComponent } from './car-owner/car-owner.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/car-list', pathMatch: 'full' },
@@ -26,6 +28,14 @@ const routes: Routes = [
   {
     path: 'owner-list',
     component: OwnerListComponent
+  },
+  {
+    path: 'list-car-owner',
+    component: ListCarOwnerComponent
+  },
+  {
+    path: 'car-owner',
+    component: CarOwnerComponent
   }
 ];
 

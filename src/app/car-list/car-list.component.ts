@@ -9,6 +9,7 @@ import { GiphyService } from '../shared/giphy/giphy.service';
 })
 export class CarListComponent implements OnInit {
   cars: Array<any>;
+  owner
 
   constructor(private carService: CarService, private giphyService: GiphyService) { }
 

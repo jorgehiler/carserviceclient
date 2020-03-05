@@ -19,6 +19,7 @@ export class CarService {
   }
 
   save(car: any): Observable<any> {
+    console.log("objeto guardado", car);
     let result: Observable<Object>;
     if (car['href']) {
       result = this.http.put(car.href, car);
