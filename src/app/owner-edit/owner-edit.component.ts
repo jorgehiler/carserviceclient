@@ -17,7 +17,7 @@ export class OwnerEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private carService: OwnerService,
+              private ownerService: OwnerService,
             ) {
   }
 
@@ -25,16 +25,18 @@ export class OwnerEditComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.carService.get(id).subscribe((car: any) => {
+        this.ownerService.get(id).subscribe((car: any) => {
+          console.log(`id: ${id}`)
           if (car) {
             this.owener = car;
           } else {
             console.log(`Car with id '${id}' not found, returning to list`);
             this.gotoList();
           }
-          console.log(car.name);
-          console.log(car);
-          this.owener = car;
+
+          this.owener = car._embedded.owners[0];
+          console.log("sdffs")
+          console.log("fsd", this.owener);
 
         });
       }
@@ -50,13 +52,13 @@ export class OwnerEditComponent implements OnInit {
   }
 
   save(form: NgForm) {
-    this.carService.save(form).subscribe(result => {
+    this.ownerService.save(form).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
   remove(href) {
-    this.carService.remove(href).subscribe(result => {
+    this.ownerService.remove(href).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
