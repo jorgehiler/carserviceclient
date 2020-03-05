@@ -28,15 +28,15 @@ export class OwnerEditComponent implements OnInit {
         this.ownerService.get(id).subscribe((car: any) => {
           console.log(`id: ${id}`)
           if (car) {
-            this.owener = car;
+            this.owener = car._embedded.owners[0];
           } else {
             console.log(`Car with id '${id}' not found, returning to list`);
             this.gotoList();
           }
 
           this.owener = car._embedded.owners[0];
-          console.log("sdffs")
-          console.log("fsd", this.owener);
+          console.log("owner", this.owener);
+          console.log("name", this.owener.name)
 
         });
       }
