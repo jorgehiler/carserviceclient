@@ -14,7 +14,6 @@ import { CarEditComponent } from './car-edit/car-edit.component';
 import { FormsModule } from '@angular/forms';
 import { OwnerListComponent } from './owner-list/owner-list.component';
 import { OwnerEditComponent } from './owner-edit/owner-edit.component';
-import { ListCarOwnerComponent } from './list-car-owner/list-car-owner.component';
 import { CarOwnerComponent } from './car-owner/car-owner.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { CarOwnerComponent } from './car-owner/car-owner.component';
     CarEditComponent,
     OwnerListComponent,
     OwnerEditComponent,
-    ListCarOwnerComponent,
     CarOwnerComponent
   ],
   imports: [
