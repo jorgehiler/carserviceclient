@@ -26,9 +26,14 @@ export class OwnerService {
   save(owner: any): Observable<any> {
     let result: Observable<Object>;
     if (owner['href']) {
+      console.log("Actualizando")
+      console.log("href", owner.href)
+      console.log(owner)
       result = this.http.put(owner.href, owner);
     } else {
       result = this.http.post(this.OWNER_API, owner);
+      console.log("Agregando nuevo")
+      console.log(owner)
     }
     return result;
   }

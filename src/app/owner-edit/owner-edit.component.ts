@@ -11,7 +11,8 @@ import { OwnerService } from '../shared/owner/owner.service';
 })
 export class OwnerEditComponent implements OnInit {
 
-  owener: any = {};
+  owener: any = {href: "no"};
+
 
   sub: Subscription;
 
@@ -37,6 +38,7 @@ export class OwnerEditComponent implements OnInit {
           this.owener = car._embedded.owners[0];
           console.log("owner", this.owener);
           console.log("name", this.owener.name)
+          console.log("href",this.owener._links.self.href )
 
         });
       }
@@ -48,11 +50,21 @@ export class OwnerEditComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/car-list']);
+    this.router.navigate(['/owner-list']);
   }
 
-  save(form: NgForm) {
-    this.ownerService.save(form).subscribe(result => {
+  save(form: any) {
+    let owner;
+    
+    if(!this.owener.href){
+      owner = {dni: form.dni, name: form.name, profession: form.profession, href: this.owener._links.self.href}
+    } else {
+      owner = {dni: form.dni, name: form.name, profession: form.profession}
+
+    }
+    console.log("Guardadndo owner edit")
+    console.log(owner);
+    this.ownerService.save(owner).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

@@ -19,6 +19,7 @@ export class CarOwnerComponent implements OnInit {
   constructor(private serviceCar: CarService, private ownerService: OwnerService) { }
 
   ngOnInit() {
+    this.owner = {dni: "111111"}
     console.log(this.ownerDni);
     if (!(this.ownerDni.length === 0)) {
       this.ownerService.get(this.ownerDni).subscribe((car: any) => {

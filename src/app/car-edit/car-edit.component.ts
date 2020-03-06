@@ -26,6 +26,8 @@ export class CarEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.car = {name: "Carrito"}
+    this.owner = {dni: "5555", name: "nameOwner", profession: "Profession"}
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
@@ -57,15 +59,21 @@ export class CarEditComponent implements OnInit, OnDestroy {
   }
 
   gotoList() {
-    this.router.navigate(['/car-list']);
+    this.router.navigate(['/car-list']);  
   }
 
-  save(form: NgForm) {
-    this.carService.save(form).subscribe(result => {
+  save(form: any) {
+    let car = {name: form.nameCar, ownerDni: form.dni, href: form.href};
+    let owner = {dni: form.dni, profession: form.proffesion, name: form.nameOwner}
+    this.carService.save(car).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
+    this.ownerService.save(owner).subscribe( result => {
+      
+    })
   }
 
+  //remover auto con href
   remove(href) {
     this.carService.remove(href).subscribe(result => {
       this.gotoList();

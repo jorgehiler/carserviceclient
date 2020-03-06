@@ -12,11 +12,14 @@
             {{owner.dni}}
           </a>
         </h3> -->
-        <h4 mat-line>{{owner.name}}</h4>
-        <p mat-line> {{owner.dni}} </p>
+        <div>
+          <h4 mat-line>{{owner.name}}</h4>
+          <p mat-line> {{owner.dni}} </p>
+        </div>
+
       </mat-list-item>
     </mat-list>
   </mat-card-content>
 
-  <button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
+  <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button>
 </mat-card>

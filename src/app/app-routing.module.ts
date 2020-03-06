@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'car-owner',
     component: CarOwnerComponent
+  },
+  {
+    path: 'owner-add',
+    component: OwnerEditComponent
   }
 ];
 
