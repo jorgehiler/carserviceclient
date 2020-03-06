@@ -14,7 +14,6 @@ export class CarListComponent implements OnInit {
   constructor(private carService: CarService, private giphyService: GiphyService) { }
 
   ngOnInit() {
-    this.cars = [{name: "Jorge Hiler", id: "123456", ownerDni:"000000", giphyUrl:""},{name: "Jorge Hiler", id: "123456", ownerDni:"000000", giphyUrl:""},{name: "Jorge Hiler", id: "123456", ownerDni:"000000", giphyUrl:""},{name: "Jorge Hiler", id: "123456", ownerDni:"000000", giphyUrl:""}]
     this.carService.getAll().subscribe(data => {
       this.cars = data;
       for (const car of this.cars) {

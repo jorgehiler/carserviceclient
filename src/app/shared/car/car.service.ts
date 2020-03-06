@@ -30,6 +30,7 @@ export class CarService {
   }
 
   remove(href: string) {
+    console.log("con que si", href)
     return this.http.delete(href);
   }
 }

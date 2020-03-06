@@ -12,22 +12,22 @@ import { OwnerService } from '../shared/owner/owner.service';
   styleUrls: ['./car-edit.component.css']
 })
 export class CarEditComponent implements OnInit, OnDestroy {
-  
+
   car: any = {};
-  owner: any = {};
+  owner: any = { dni: "", name: "", profession: "" };
 
   sub: Subscription;
+  avalibleField: boolean = false;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private carService: CarService,
-              private ownerService: OwnerService,
-              private giphyService: GiphyService) {
+    private router: Router,
+    private carService: CarService,
+    private ownerService: OwnerService,
+    private giphyService: GiphyService) {
+    this.owner = { dni: "", name: "", profession: "" };
   }
 
   ngOnInit() {
-    this.car = {name: "Carrito"}
-    this.owner = {dni: "5555", name: "nameOwner", profession: "Profession"}
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
@@ -37,13 +37,16 @@ export class CarEditComponent implements OnInit, OnDestroy {
             this.car.href = car._links.self.href;
             console.log("giphy", this.car.href)
             this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
-            this.ownerService.get(car.ownerDni).subscribe((owner: any) => { 
-              console.log("kjsfsfdsfsd")
-              console.log(owner);
-              this.owner = owner;
-              this.owner = this.owner._embedded.owners[0];
-              console.log("kjes")
-              console.log(this.owner);
+            console.log(car)
+            console.log("consultando owner con dni ", car.ownerDni)
+            this.ownerService.get(car.ownerDni).subscribe((owner: any) => {
+              if (owner._embedded.owners[0]) {
+                this.owner = owner;
+                this.owner = this.owner._embedded.owners[0];
+                this.avalibleField = true;
+              } else {
+                this.owner = { dni: "", name: "", profession: "" };
+              }
             })
           } else {
             console.log(`Car with id '${id}' not found, returning to list`);
@@ -59,18 +62,20 @@ export class CarEditComponent implements OnInit, OnDestroy {
   }
 
   gotoList() {
-    this.router.navigate(['/car-list']);  
+    this.router.navigate(['/car-list']);
   }
 
   save(form: any) {
-    let car = {name: form.nameCar, ownerDni: form.dni, href: form.href};
-    let owner = {dni: form.dni, profession: form.proffesion, name: form.nameOwner}
+    let car = { name: form.nameCar, ownerDni: form.dni, href: form.href };
+    let owner = { dni: form.dni, profession: form.proffesion, name: form.nameOwner }
     this.carService.save(car).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
-    this.ownerService.save(owner).subscribe( result => {
-      
-    })
+    if(!this.avalibleField){
+      this.ownerService.save(owner).subscribe(result => {
+      })
+    }
+
   }
 
   //remover auto con href
@@ -79,5 +84,22 @@ export class CarEditComponent implements OnInit, OnDestroy {
       this.gotoList();
     }, error => console.error(error));
   }
-}
 
+
+  onSearchOwner(searchValue: string): void {
+    console.log(searchValue);
+    this.ownerService.get(searchValue).subscribe((owner: any) => {
+      if (owner._embedded.owners[0]) {
+        let an = owner._embedded.owners[0];
+        this.owner.name = an.name;
+        this.owner.profession = an.profession;
+        this.avalibleField = true;
+      } else {
+        this.avalibleField = false;
+        this.owner.name = "";
+        this.owner.profession ="";
+        console.log("no ha")
+      }
+    })
+  }
+}
