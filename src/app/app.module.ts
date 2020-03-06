@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CarListComponent } from './car-list/car-list.component';
 
 
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatIconModule, MatCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarEditComponent } from './car-edit/car-edit.component';
 import { FormsModule } from '@angular/forms';
@@ -38,6 +38,7 @@ import { CarOwnerComponent } from './car-owner/car-owner.component';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
+    MatCheckboxModule,
     FormsModule
   ],
   providers: [],

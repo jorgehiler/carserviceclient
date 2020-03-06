@@ -9,6 +9,10 @@ import { OwnerService } from '../shared/owner/owner.service';
 export class OwnerListComponent implements OnInit {
 
   owners: Array<any>;
+  delete: boolean = false;
+
+  selectedOptions: Array<any>;
+
 
   constructor(private ownerService: OwnerService) { }
 
@@ -20,5 +24,25 @@ export class OwnerListComponent implements OnInit {
       console.log(this.owners[0]._links.self.href.slice(this.owners[0]._links.self.href.lastIndexOf('/')).substring(1,3));
       console.log(this.owners);
     });
+  }
+
+  onNgModelChange(event){
+    console.log('on ng model change', event);
+  }
+
+  deleteOwners(){
+    this.selectedOptions.forEach((owner)=> {
+      console.log("borrando", owner._links.self.href)
+      this.ownerService.remove(owner._links.self.href).subscribe(result => {
+      },
+      error => {
+        console.log(error)
+      }
+      )
+    })
+  }
+
+  deleteList(){
+    
   }
 }

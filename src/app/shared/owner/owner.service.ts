@@ -39,6 +39,7 @@ export class OwnerService {
   }
 
   remove(href: string) {
+    console.log("Desde remove: ", href)
     return this.http.delete(href);
   }
 }
